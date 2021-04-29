@@ -6,6 +6,7 @@ from pydantic import BaseModel
 from imutils.perspective import four_point_transform
 from imutils import contours
 from datetime import datetime
+import uvicorn
 import os
 import imutils
 import numpy as np
@@ -244,3 +245,6 @@ async def extract_text(request: Request):
     if form["commands"] == "comparing":
         return templates.TemplateResponse("compare.html", {"request": request})
     return templates.TemplateResponse("index.html", {"request": request, "label": label})
+
+if __name__ == "__main__":
+    uvicorn.run("app:app", host="0.0.0.0", port=8080, log_level="info")
